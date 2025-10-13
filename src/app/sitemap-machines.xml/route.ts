@@ -7,6 +7,19 @@ export async function GET(request: Request) {
   const url = new URL(request.url);
   const baseUrl = `${url.protocol}//${url.host}`;
   const currentDate = new Date().toISOString();
+  const toW3CDate = (value: any): string => {
+    if (!value) return currentDate;
+    try {
+      const str = String(value).trim();
+      const normalized = /\d{4}-\d{2}-\d{2} \d{2}:\d{2}:\d{2}/.test(str)
+        ? str.replace(' ', 'T') + 'Z'
+        : str;
+      const d = new Date(normalized);
+      return isNaN(d.getTime()) ? currentDate : d.toISOString();
+    } catch {
+      return currentDate;
+    }
+  };
 
   try {
     // Fetch machines from database, fallback to static data
@@ -36,7 +49,7 @@ export async function GET(request: Request) {
   </url>
 ${machines
   .map((machine) => {
-    const lastModified = (machine as any).updated_at || (machine as any).created_at || machine.dateCompleted || currentDate;
+    const lastModified = toW3CDate((machine as any).updated_at || (machine as any).created_at || machine.dateCompleted || currentDate);
     const priority = machine.status === 'Completed' ? '0.9' : '0.7';
     const changeFreq = machine.status === 'Completed' ? 'monthly' : 'weekly';
     
