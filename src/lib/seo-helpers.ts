@@ -172,9 +172,9 @@ export function generateMachineStructuredData(
     },
     "mainEntityOfPage": {
       "@type": "WebPage",
-      "@id": `${siteUrl}/machines/${machine.id}`
+      "@id": `${siteUrl}/machines/htb/${machine.id}`
     },
-    "url": `${siteUrl}/machines/${machine.id}`,
+    "url": `${siteUrl}/machines/htb/${machine.id}`,
     "image": {
       "@type": "ImageObject",
       "url": `${siteUrl}/api/og/machine/${machine.id}`,
@@ -290,7 +290,7 @@ export function generateMachineMetadata(machine: {
     openGraph: {
       title,
       description,
-      url: `${baseUrl}/machines/${machine.id}`,
+      url: `${baseUrl}/machines/htb/${machine.id}`,
       siteName: "0xJerry's Lab",
       images: [
         {
@@ -315,7 +315,7 @@ export function generateMachineMetadata(machine: {
       images: [`${baseUrl}/api/og/machine/${machine.id}`],
     },
     alternates: {
-      canonical: `${baseUrl}/machines/${machine.id}`,
+      canonical: `${baseUrl}/machines/htb/${machine.id}`,
     },
     other: {
       'article:section': 'Cybersecurity',
