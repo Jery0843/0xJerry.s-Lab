@@ -8,6 +8,21 @@ export async function GET(request: Request) {
   const baseUrl = `${url.protocol}//${url.host}`;
   const currentDate = new Date().toISOString();
 
+  const toW3CDate = (value: any): string => {
+    if (!value) return currentDate;
+    try {
+      // Normalize common DB format "YYYY-MM-DD HH:mm:ss"
+      const str = String(value).trim();
+      const normalized = /\d{4}-\d{2}-\d{2} \d{2}:\d{2}:\d{2}/.test(str)
+        ? str.replace(' ', 'T') + 'Z'
+        : str;
+      const d = new Date(normalized);
+      return isNaN(d.getTime()) ? currentDate : d.toISOString();
+    } catch {
+      return currentDate;
+    }
+  };
+  
   // Static pages with their priorities and change frequencies
   const staticPages = [
     {
@@ -62,7 +77,7 @@ export async function GET(request: Request) {
 
   const machineUrls = machines
     .map((machine: any) => {
-      const lastModified = machine.updated_at || machine.created_at || machine.dateCompleted || currentDate;
+      const lastModified = toW3CDate(machine.updated_at || machine.created_at || machine.dateCompleted || currentDate);
       const changeFreq = machine.status === 'Completed' ? 'monthly' : 'weekly';
       const priority = machine.status === 'Completed' ? '0.9' : '0.7';
       // Use nested HTB path
