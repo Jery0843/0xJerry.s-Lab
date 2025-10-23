@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { Orbitron, Fira_Code } from "next/font/google";
+import Script from "next/script";
 import "./globals.css";
 import RootLayoutContent from "@/components/RootLayoutContent";
 
@@ -100,6 +101,14 @@ export default function RootLayout({
       <body
         className={`${orbitron.variable} ${firaCode.variable} antialiased min-h-screen flex flex-col`}
       >
+        {/* Google AdSense Script */}
+        <Script
+          async
+          src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-5661675622272159"
+          crossOrigin="anonymous"
+          strategy="lazyOnload"
+        />
+        
         <RootLayoutContent>{children}</RootLayoutContent>
       </body>
     </html>
