@@ -65,7 +65,9 @@ export default function ActiveMachine403({ machineName, summary }: ActiveMachine
                             {summary ? (
                                 <p className="text-gray-300 text-sm leading-7">{summary}</p>
                             ) : (
-                                <p className="text-gray-300 text-sm leading-7">Easy cowboy — the vault isn't open yet. When HTB stamps "Retired," the walkthrough will parachute in with style.</p>
+                                <p className="text-gray-300 text-sm leading-7">
+                                    Easy cowboy — the vault isn&apos;t open yet. When HTB stamps &quot;Retired,&quot; the walkthrough will parachute in with style.
+                                </p>
                             )}
                         </div>
 
@@ -81,7 +83,7 @@ export default function ActiveMachine403({ machineName, summary }: ActiveMachine
                             </motion.div>
                             <motion.div initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.2 }} className="rounded-lg border border-cyber-purple/20 bg-terminal-bg/40 p-3">
                                 <p className="text-xs text-gray-400">Heads-up</p>
-                                <p className="text-sm text-cyber-purple font-semibold">We respect HTB's rules</p>
+                                <p className="text-sm text-cyber-purple font-semibold">We respect HTB&apos;s rules</p>
                             </motion.div>
                         </div>
 
