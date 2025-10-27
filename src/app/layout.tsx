@@ -108,10 +108,14 @@ export default function RootLayout({
           crossOrigin="anonymous"
           strategy="lazyOnload"
         />
-        <script async src="https://cloud.umami.is/script.js" 
+        {/* Umami Analytics */}
+<Script
+  src="https://cloud.umami.is/script.js"
   data-website-id="f6696075-8457-4c24-b1f4-32665790a4d0"
-  data-domains="0xjerry.jerome.co.in">
-</script>
+  data-domains="0xjerry.jerome.co.in"
+  strategy="afterInteractive"
+/>
+
 
         
         <RootLayoutContent>{children}</RootLayoutContent>
