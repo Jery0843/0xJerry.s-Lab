@@ -26,37 +26,62 @@ const NewsletterPopup = ({ onClose }: NewsletterPopupProps) => {
   };
 
   const handleSubmit = async (e: React.FormEvent) => {
-    e.preventDefault();
-    setLoading(true);
-    setError(null);
+  e.preventDefault();
+  setLoading(true);
+  setError(null);
 
-    try {
-      const response = await fetch('/api/newsletter', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json'
-        },
-        body: JSON.stringify(formData)
-      });
+  try {
+    // Step 1: Validate email via Make.com
+    const validationResponse = await fetch('https://hook.eu2.make.com/ejk7hpxxblt35bp7tza6mmfstnne5loy', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({ 
+        email: formData.email,
+        name: formData.name,
+        country: formData.country
+      })
+    });
 
-      const data = await response.json();
+    const validationData = await validationResponse.json();
 
-      if (data.success) {
-        setSuccess(true);
-        localStorage.setItem('newsletterPopupStatus', 'submitted');
-        // Close popup after 2 seconds
-        setTimeout(() => {
-          onClose();
-        }, 2000);
-      } else {
-        setError(data.error || 'Failed to subscribe');
-      }
-    } catch (err) {
-      setError('Network error. Please try again.');
-    } finally {
+    // Step 2: If validation fails, show error
+    if (!validationResponse.ok || !validationData.valid) {
+      setError(validationData.error || 'Invalid email address. Please use a permanent email.');
       setLoading(false);
+      return;
     }
-  };
+
+    // Step 3: If validation passes, save to database
+    const response = await fetch('/api/newsletter', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify(formData)
+    });
+
+    const data = await response.json();
+
+    if (data.success) {
+      setSuccess(true);
+      localStorage.setItem('newsletterPopupStatus', 'submitted');
+      // Close popup after 2 seconds
+      setTimeout(() => {
+        onClose();
+      }, 2000);
+    } else {
+      setError(data.error || 'Failed to subscribe');
+    }
+
+  } catch (err) {
+    setError('Network error. Please try again.');
+  } finally {
+    setLoading(false);
+  }
+};
+
 
   const countries = [
     'United States', 'United Kingdom', 'Canada', 'Australia', 'Germany',
