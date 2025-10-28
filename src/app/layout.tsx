@@ -115,15 +115,23 @@ export default function RootLayout({
   data-domains="0xjerry.jerome.co.in"
   strategy="afterInteractive"
 />
-        {/* EffectiveGate CPM Script */}
+        {/* EffectiveGate CPM Script 1 */}
         <Script
           src="//pl27944362.effectivegatecpm.com/e11a6fd2423d8ad4c4439e6d41db5710/invoke.js"
           strategy="lazyOnload"
         />
+
+        {/* EffectiveGate CPM Script 2 */}
+        <Script
+          src="//pl27944422.effectivegatecpm.com/de/92/4e/de924e56af0c1b9f4c5ae9e1b295f6de.js"
+          strategy="lazyOnload"
+        />
         
         <div id="container-e11a6fd2423d8ad4c4439e6d41db5710"></div>
+        
+    
 
-        <script type='text/javascript' src='//pl27944422.effectivegatecpm.com/de/92/4e/de924e56af0c1b9f4c5ae9e1b295f6de.js'></script>
+        
 
 
         
