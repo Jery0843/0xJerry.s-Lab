@@ -115,6 +115,13 @@ export default function RootLayout({
   data-domains="0xjerry.jerome.co.in"
   strategy="afterInteractive"
 />
+        {/* EffectiveGate CPM Script */}
+        <Script
+          src="//pl27944362.effectivegatecpm.com/e11a6fd2423d8ad4c4439e6d41db5710/invoke.js"
+          strategy="lazyOnload"
+        />
+        
+        <div id="container-e11a6fd2423d8ad4c4439e6d41db5710"></div>
 
 
         
