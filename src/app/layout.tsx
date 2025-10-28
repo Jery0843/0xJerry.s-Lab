@@ -123,6 +123,8 @@ export default function RootLayout({
         
         <div id="container-e11a6fd2423d8ad4c4439e6d41db5710"></div>
 
+        <script type='text/javascript' src='//pl27944422.effectivegatecpm.com/de/92/4e/de924e56af0c1b9f4c5ae9e1b295f6de.js'></script>
+
 
         
         <RootLayoutContent>{children}</RootLayoutContent>
